@@ -1,0 +1,17 @@
+##https://www.w3schools.com/js/tryit.asp?filename=tryjson_parse##
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Create Object from JSON String</h2>
+
+<p id="demo"></p>
+
+<script>
+var text = '{"name":"John", "isan":"function(){precio=273; if(precio<274) {liminf=0;cuota=0;tasa=2;isan=1;}else {if(precio<329){liminf=274;cuota=5499;tasa=5;isan=2;}} return isan;}","city":"New York"}';var obj = JSON.parse(txt);
+obj.isan = eval ("("+obj.isan+ ")");
+document.getElementById("demo").innerHTML = obj.name + ", " + obj.isan(); #el nombre del objeto y el resultado de ejecutar la funcion#
+</script>
+
+</body>
+</html>
