@@ -1,0 +1,27 @@
+### Objeto XML HttpRequest##
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Using the XMLHttpRequest Object</h2>
+
+<div id="demo">
+<button type="button" onclick="loadXMLDoc()">Change Content</button>
+</div>
+
+<script>
+function loadXMLDoc() {
+  var controller = new XMLHttpRequest();
+  controller.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  controller.open("GET", "xmlhttp_info.txt", true);#abre controller y traime el archivo xmlhttp_info.txt que está en el servidor#
+  controller.send();
+}
+</script>
+
+</body>
+</html>
