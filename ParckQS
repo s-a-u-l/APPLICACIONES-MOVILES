@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head><title>Event Example</title><meta charset="UTF-8">
+<script type="text/javascript" src="zepto.min.js" > </script>
+<script type="text/javascript">
+  $(function(){ 
+    localStorage.cr = (localStorage.cr || "0.00");
+    localStorage.memoria = (localStorage.memoria || "[]");    
+    var t, cl = $("#crono");
+    var listado_marcas = JSON.parse(localStorage.memoria)
+
+    function incremento() {localStorage.cr = +localStorage.cr + 0.01}
+    function mostrar()  { cl.html((+localStorage.cr).toFixed(2));};
+    function arrancar() { t=setInterval(function() {incremento(); mostrar()}, 10);};
+    function parar()    {  clearInterval(t); t=undefined } 
+    function marcador() { if ($('#crono') != undefined) {
+    	listado_marcas.push($("#crono").html());
+    var i, marcas = "";
+    for (i = 0; i < listado_marcas.length; ++i) {
+    marcas += "<ol>" + listado_marcas[i] + " segundos</ol>";
+    $("#marcas").html(marcas);}
+}
+    else {listado_marcas = ""}
+    }; 
+    function cambiar()  { if (!t) arrancar(); else {parar(); marcador()} };
+
+    $("#cambiar").on('click', cambiar);
+    $("#inicializar").on('click', function(){ if (t) {mostrar} else {localStorage.cr = "0.00"; $("#marcas").html(""); localStorage.memoria = (localStorage.memoria || "[]"); mostrar()}});
+    mostrar();
+  });
+</script>
+</head>
+<body>
+<h2>Cronómetro</h2>
+
+<h2><span id="crono"> 0.0 </span> segundos </h2>
+
+<button type="button" id="cambiar"> arrancar/parar </button>
+<button type="button" id="inicializar">  inicializar </button>
+<div id="marcas"></div>
+</body>
+</html>
